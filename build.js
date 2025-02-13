@@ -33,8 +33,14 @@ if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
 }
 const minified = JSON.stringify(result);
-const output = ["Windows Registry Editor Version 5.00"]
-output.push("");
-output.push("[HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Edge]");
-output.push(`"ManagedFavorites"=${JSON.stringify(minified)}`);
-fs.writeFileSync(`${outputDir}/edge-favorites.reg`, output.join("\n"));
+const outputEdge = ["Windows Registry Editor Version 5.00"]
+outputEdge.push("");
+outputEdge.push("[HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Edge]");
+outputEdge.push(`"ManagedFavorites"=${JSON.stringify(minified)}`);
+fs.writeFileSync(`${outputDir}/edge-favorites.reg`, outputEdge.join("\n"));
+
+const outputChrome = ["Windows Registry Editor Version 5.00"]
+outputChrome.push("");
+outputChrome.push("[HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Google\\Chrome]");
+outputChrome.push(`"ManagedBookmarks"=${JSON.stringify(minified)}`);
+fs.writeFileSync(`${outputDir}/chrome-bookmarks.reg`, outputChrome.join("\n"));
